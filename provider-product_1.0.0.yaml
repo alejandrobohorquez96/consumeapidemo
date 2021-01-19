@@ -1,0 +1,21 @@
+product: 1.0.0
+info:
+  name: provider-product
+  title: provider-product
+  version: 1.0.0
+visibility:
+  view:
+    type: public
+  subscribe:
+    type: authenticated
+plans:
+  default:
+    title: Default Plan
+    description: Default Plan
+    approval: false
+    rate-limit:
+      value: 100/hour
+      hard-limit: false
+apis:
+  provider-api:
+    $ref: provider-api_1.0.0.yaml

@@ -1,0 +1,47 @@
+swagger: '2.0'
+info:
+  x-ibm-name: provider-api
+  title: test
+  version: 1.0.0
+schemes:
+  - https
+host: $(catalog.host)
+basePath: /provider-api
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+security:
+  - clientIdHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  assembly:
+    execute:
+      - invoke:
+          target-url: 'http://192.168.0.3:6661/customer$(request.search)'
+  phase: realized
+paths:
+  /customer:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+      parameters:
+        - name: fname
+          type: string
+          required: true
+          in: query
+        - name: lname
+          type: string
+          required: true
+          in: query
+definitions: {}
+tags: []

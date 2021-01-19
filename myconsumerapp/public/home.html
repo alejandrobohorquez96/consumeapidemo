@@ -1,0 +1,38 @@
+<html>
+    <head>
+    <title>Customer Information</title>
+    </head>
+<body>
+    <form>
+        <h1>Customer Information</h1>
+        <div id="warn"></div>
+        <div id="customers">
+            <input id="firstname" type="text" placeholder="Enter first name...">
+            <input id="lastname" type="text" placeholder="Enter last name...">
+            <button type='button' onclick="ifClicked()">Submit</button>
+        </div>
+        <div id="output"></div>
+    </form>
+    <script>
+    function ifClicked(){
+        let fnamebox = document.getElementById('firstname').value
+        let lnamebox = document.getElementById('lastname').value
+        document.getElementById('warn').innerHTML = ""
+        document.getElementById('output').innerHTML = ""
+        let endpoint = "http://localhost:6662/customer?fname=" + fnamebox + "&lname=" + lnamebox
+        if( !lnamebox || !fnamebox){
+            document.getElementById('warn').innerHTML = "Please provide a first and last name"
+        }else{
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status === 200) {
+                    document.getElementById('output').innerText = this.responseText
+                }
+            };
+            http.open("GET", endpoint, false);
+            http.send();
+        }
+    }
+    </script>
+</body>
+</html>
